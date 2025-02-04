@@ -1,0 +1,62 @@
+.table-responsive {
+    margin-top: 20px;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+#processingStatus {
+    margin-top: 10px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.card-header {
+    padding: 1rem;
+}
+
+/* Reduce table font size */
+.table {
+    font-size: 0.75rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 0.5rem;
+}
+
+.table td {
+    vertical-align: middle;
+    white-space: nowrap;
+    padding: 0.5rem;
+}
+
+/* Make the action column sticky */
+.table th:first-child,
+.table td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
+    border-right: 2px solid #dee2e6;
+}
+
+.table th:first-child {
+    background-color: #f8f9fa;
+}
+
+.btn-danger {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-danger:hover {
+    transform: scale(1.05);
+}
+
+/* Make delete button smaller */
+.btn-sm {
+    padding: 0.15rem 0.3rem;
+    font-size: 0.75rem;
+}
