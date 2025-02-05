@@ -1,4 +1,26 @@
-// Global variables
+// Function to handle Weight value conversion
+function processWeightValue(value) {
+    // If value is already a number, return it directly
+    if (typeof value === 'number') {
+        return value;
+    }
+    
+    // If value is undefined or empty, return default
+    if (!value) {
+        return 0.0;
+    }
+    
+    // Try to parse the string value
+    const parsed = parseFloat(value);
+    
+    // If parsed value is not a number, return default
+    if (isNaN(parsed)) {
+        return 0.0;
+    }
+    
+    return parsed;
+}
+    // Global variables
 let ausPostcodes = null;
 let currentData = [];
 let columnHeaders = {};
@@ -64,9 +86,13 @@ function handleMainFileSelect(event) {
             I: row.I || '',
             K: row.K || '',
             L: row.L || '',
+            P: row.P || '',
             R: row.R || '',
             X: row.X || ''
         }));
+
+        // Debug log for Weight values
+            console.log('Weight values from Excel:', processedData.map(row => row.P));
 
         processData(processedData);
         
@@ -216,13 +242,13 @@ function displayData(data) {
         const deleteCell = document.createElement('td');
         deleteCell.innerHTML = `
             <button class="btn btn-danger btn-sm" onclick="deleteRow(${index})">
-                <i class="fas fa-trash"></i>
+                <i class="bi bi-trash3"></i>
             </button>
         `;
         tr.appendChild(deleteCell);
 
         // Add all other cells
-        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'R', 'X'].forEach(col => {
+        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L','R', 'X'].forEach(col => {
             const td = document.createElement('td');
             td.textContent = row[col] || '';
             // Highlight cells where state was looked up
@@ -257,8 +283,10 @@ function deleteRow(index) {
 function clearAll() {
     currentData = [];
     columnHeaders = {};
-    document.getElementById('previewBody').innerHTML = '<tr><td colspan="14" class="text-center">No data loaded</td></tr>';
+    document.getElementById('previewBody').innerHTML = '<tr><td></td><td colspan="13" class="text-center">No data loaded</td></tr>';
     document.getElementById('excelFile').value = '';
+    document.getElementById('emailUpdateFile').value = '';  // Clear email update file input
+    document.getElementById('emailUpdateFile').disabled = true;  // Disable email update file input
     document.getElementById('processingStatus').style.display = 'none';
     
     // Reset headers to default
@@ -333,6 +361,7 @@ function exportToCsv() {
             'I': 'Destination State',
             'K': 'Destination Country',
             'L': 'Destination Email',
+            'P': 'Weight',
             'R': 'Reference',
             'X': 'Country Code'
         };
@@ -368,12 +397,18 @@ function exportToCsv() {
         });
 
         // Set fixed values for specific columns
+        fullRow['Item Name'] = 'Printed Books';
+        fullRow['Item Price'] = '10';
+        fullRow['Instructions'] = '';
         fullRow['Carrier'] = 'DHL';
         fullRow['Carrier Product Unit Type'] = 'Parcel';
-        fullRow['Declared Value Currency'] = 'AUD';
-        fullRow['Dangerous Goods'] = '0';
-        fullRow['DDP'] = 'N';
+        fullRow['Declared Value Currency'] = 'GBP';
+        fullRow['Code'] = '49019900';
+        fullRow['Contents'] = 'Printed Books';
+        fullRow['Dangerous Goods'] = '';
+        fullRow['DDP'] = 'Y';
         fullRow['Qty'] = '1';
+        fullRow['Carrier Product Unit Type'] = 'Box';
         
         return fullRow;
     });
