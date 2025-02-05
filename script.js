@@ -283,7 +283,7 @@ function deleteRow(index) {
 function clearAll() {
     currentData = [];
     columnHeaders = {};
-    document.getElementById('previewBody').innerHTML = '<tr><td></td><td colspan="13" class="text-center">No data loaded</td></tr>';
+    document.getElementById('previewBody').innerHTML = '<tr><td></td><td colspan="14" class="text-center">No data loaded</td></tr>';
     document.getElementById('excelFile').value = '';
     document.getElementById('emailUpdateFile').value = '';  // Clear email update file input
     document.getElementById('emailUpdateFile').disabled = true;  // Disable email update file input
@@ -293,19 +293,19 @@ function clearAll() {
     const headerRow = document.querySelector('#previewTable thead tr');
     headerRow.innerHTML = `
         <th>Action</th>
-        <th>Column A</th>
-        <th>Column B</th>
-        <th>Column C</th>
-        <th>Column D</th>
-        <th>Column E</th>
-        <th>Column F</th>
-        <th>Column G</th>
-        <th>Column H</th>
-        <th>Column I</th>
-        <th>Column K</th>
-        <th>Column L</th>
-        <th>Column R</th>
-        <th>Column X</th>
+        <th>Order Number</th>
+        <th>Order date</th>
+        <th>Name</th>
+        <th>Add. Line 1</th>
+        <th>Add. Line 2</th>
+        <th>Add. Line 3</th>
+        <th>City</th>
+        <th>Postcode</th>
+        <th>Destination State</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Reference</th>
+        <th>Country Code</th>
     `;
     
     disableButtons();
