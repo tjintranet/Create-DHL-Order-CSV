@@ -17,8 +17,9 @@
 
 ### Before You Begin
 Ensure you have:
-- Your main order Excel file
-- Any email update files (if required)
+- Your main order Excel file - available to download from this link, http://192.168.10.251/epace/company:c001/inquiry/UserDefinedInquiry/view/5241
+
+- Any email update files (if required) - Emailed notifications.
 - All column headers match the expected format
 
 ## Processing Main Order File
