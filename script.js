@@ -55,7 +55,7 @@ function handleMainFileSelect(event) {
         // Get headers first
         const range = XLSX.utils.decode_range(firstSheet['!ref']);
         const headers = {};
-        const cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'R', 'X'];
+        const cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'R', 'X'];
         
         cols.forEach(col => {
             const cell = firstSheet[`${col}1`];
@@ -84,6 +84,7 @@ function handleMainFileSelect(event) {
             G: row.G || '',
             H: row.H || '',
             I: row.I || '',
+            J: row.J || '',
             K: row.K || '',
             L: row.L || '',
             P: row.P || '',
@@ -224,7 +225,7 @@ function updateTableHeaders(headers) {
     headerRow.innerHTML = '<th>Action</th>';
     
     // Add the column headers in order
-    ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'R', 'X'].forEach(col => {
+    ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'R', 'X'].forEach(col => {
         const th = document.createElement('th');
         th.textContent = headers[col];
         headerRow.appendChild(th);
@@ -248,7 +249,7 @@ function displayData(data) {
         tr.appendChild(deleteCell);
 
         // Add all other cells
-        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L','R', 'X'].forEach(col => {
+        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'R', 'X'].forEach(col => {
             const td = document.createElement('td');
             td.textContent = row[col] || '';
             // Highlight cells where state was looked up
@@ -292,21 +293,22 @@ function clearAll() {
     // Reset headers to default
     const headerRow = document.querySelector('#previewTable thead tr');
     headerRow.innerHTML = `
-        <th>Action</th>
-        <th>Order Number</th>
-        <th>Order date</th>
-        <th>Name</th>
-        <th>Add. Line 1</th>
-        <th>Add. Line 2</th>
-        <th>Add. Line 3</th>
-        <th>City</th>
-        <th>Postcode</th>
-        <th>Destination State</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Reference</th>
-        <th>Country Code</th>
-    `;
+    <th>Action</th>
+    <th>Order Number</th>
+    <th>Order date</th>
+    <th>Name</th>
+    <th>Add. Line 1</th>
+    <th>Add. Line 2</th>
+    <th>Add. Line 3</th>
+    <th>City</th>
+    <th>Postcode</th>
+    <th>Destination State</th>
+    <th>Destination Country</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Reference</th>
+    <th>Country Code</th>
+`;
     
     disableButtons();
 }
@@ -359,8 +361,9 @@ function exportToCsv() {
             'G': 'Destination City',
             'H': 'Destination Postcode',
             'I': 'Destination State',
-            'K': 'Destination Country',
-            'L': 'Destination Email',
+            'J': 'Destination Country',
+            'K': 'Destination Email',
+            'L': 'Destination Phone',
             'P': 'Weight',
             'R': 'Reference',
             'X': 'Country Code'
